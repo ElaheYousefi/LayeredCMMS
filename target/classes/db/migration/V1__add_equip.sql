@@ -1,0 +1,1 @@
+insert into equipment values(7, 'boiler3');

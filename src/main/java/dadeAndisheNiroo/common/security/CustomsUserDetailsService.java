@@ -33,7 +33,7 @@ public class CustomsUserDetailsService implements UserDetailsService {
         System.out.println("pass.length="+ user.getPassword().length());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("MATCH TEST = " +
-                encoder.matches("mypass", user.getPassword()));
+                encoder.matches("1234", user.getPassword()));
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),

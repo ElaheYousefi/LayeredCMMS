@@ -1,9 +1,9 @@
 package dadeAndisheNiroo.task.model;
 
 import dadeAndisheNiroo.equipment.model.EquipModel;
+import dadeAndisheNiroo.task.AssignTaskStatus;
 import dadeAndisheNiroo.workOrder.model.WorkOrderModel;
 import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +23,7 @@ public class AssignTask {
     @JoinColumn(name="definedTask_id")
     private DefinedTask definedTask;
 
-    private LocalDate lastExecutionDate;
+    private LocalDate nextExecutionDate;
 
     @OneToMany(mappedBy = "assignTask")
     private List<WorkOrderModel> workOrderModelList;
@@ -31,12 +31,22 @@ public class AssignTask {
     @Nullable
     private Integer active;
 
-    public LocalDate getLastExecutionDate() {
-        return lastExecutionDate;
+    private AssignTaskStatus status;
+
+    public AssignTaskStatus getStatus() {
+        return status;
     }
 
-    public void setLastExecutionDate(LocalDate lastExecutionDate) {
-        this.lastExecutionDate = lastExecutionDate;
+    public void setStatus(AssignTaskStatus status) {
+        this.status = status;
+    }
+
+    public LocalDate getNextExecutionDate() {
+        return nextExecutionDate;
+    }
+
+    public void setNextExecutionDate(LocalDate nextExecutionDate) {
+        this.nextExecutionDate = nextExecutionDate;
     }
 
     public void setActive(@Nullable Integer active) {

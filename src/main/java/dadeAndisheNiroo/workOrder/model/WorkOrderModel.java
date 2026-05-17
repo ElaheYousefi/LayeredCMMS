@@ -28,6 +28,15 @@ public class WorkOrderModel {
     private String observResult;
     private WorkOrderStatus workOrderStatus;
     private EquipStatus equipStatus;
+    private LocalDate doneDate;
+
+    public LocalDate getDoneDate() {
+        return doneDate;
+    }
+
+    public void setDoneDate(LocalDate doneDate) {
+        this.doneDate = doneDate;
+    }
 
     public int getId() {
         return id;

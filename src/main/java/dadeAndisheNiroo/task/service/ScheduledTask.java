@@ -43,37 +43,9 @@ public class ScheduledTask {
     // 0 means at min 0
     // 1 means at 1 AM
     // means every day month year
-    @Scheduled(fixedRate = 100000)  //each 100 seconds
-    public void generateWorkOrders() {
+    @Scheduled(fixedRate = 200000)  //each 200 seconds
+    public void generateWorkOrdersScheduler() {
         logger.info("start scheduled task");
-        List<AssignTask> tasks = assignedTaskRepository.findActiveTasks();
-
-        for (AssignTask task : tasks) {
-            logger.debug("equipName="+ task.getEquipModel().getName());
-            DefinedTask definedTask= task.getDefinedTask();
-
-            LocalDate nextDueDate = null;
-            if(task.getLastExecutionDate() == null) {
-                if (definedTask.getStartDate().isBefore(LocalDate.now())) {
-                    nextDueDate = LocalDate.now();
-                }else
-                    nextDueDate= definedTask.getStartDate();
-            }else{
-                    nextDueDate= task.getLastExecutionDate()
-                            .plusDays(definedTask.getPeriodDay());
-            }
-
-            if (nextDueDate.isBefore(LocalDate.now())
-                    || nextDueDate.isEqual(LocalDate.now())) {
-
-                boolean exists =
-                        workOrderRepository
-                                .existsByWorkOrderStatusAndAssignTask_Id(WorkOrderStatus.InProgress, task.getId());
-
-                if (!exists) {
-                    workOrderService.addWorkOrder(task, nextDueDate);
-                }
-            }
-        }
+        workOrderService.generateWorkOrders();
     }
 }

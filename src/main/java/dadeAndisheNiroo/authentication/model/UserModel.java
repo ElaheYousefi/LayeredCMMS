@@ -15,7 +15,6 @@ public class UserModel implements UserDetails {
     @Id
     @GeneratedValue
     private int id;
-
     private String username;
     private String password;
     private String role;

@@ -24,16 +24,16 @@ class UserControllerTest {
     @Test
     void login() throws Exception {
         UserModel user= new UserModel();
-        user.setUsername("Elahe_You");
-        user.setPassword("mypass");
+        user.setUsername("admin");
+        user.setPassword("1234");
         user.setRole("ADMIN");
         userService.addUser(user);
 
         mockMvc.perform(post("/auth/login")
                 .contentType("application/json")
                 .content("""
-                        {   "username":"Elahe_You",
-                            "password":"mypass"
+                        {   "username":"admin",
+                            "password":"1234"
                         }
                         """))
                 .andExpect(status().isOk())
